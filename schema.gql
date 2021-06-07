@@ -1,0 +1,123 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Token {
+  token: String!
+}
+
+type User {
+  id: Int!
+  first_name: String!
+  last_name: String!
+  phone: String!
+  email: String!
+  username: String!
+  password: String!
+  is_active: Boolean!
+  role: String!
+}
+
+type Quiz {
+  id: Int!
+  title: String!
+  created_by: Float!
+}
+
+type Question {
+  id: Int!
+  ques_text: String!
+  is_active: Boolean!
+  quiz_id: Float!
+  created_by: Float!
+}
+
+type Option {
+  id: Int!
+  opt_text: String!
+  is_correct: Boolean!
+  is_active: Boolean!
+  ques_id: Float!
+}
+
+type Participants {
+  id: Int!
+  quiz_id: Float!
+  user_id: Float!
+}
+
+type Answer {
+  id: Int!
+  ques_id: Float!
+  opt_id: Float!
+  part_id: Float!
+  is_correct: Boolean!
+}
+
+type Query {
+  getQuiz: [Quiz!]!
+  getQues(quiz_id: Float!): [Question!]!
+  getOption(ques_id: Float!): [Option!]!
+  getParticipant(quiz_id: Float!): [Participants!]!
+  getParticipantByUserId(id: Float!): Participants!
+  getAns(id: Float!): [Answer!]!
+}
+
+type Mutation {
+  SignUp(userDto: UserDto!): User!
+  SignIn(signinDto: SigninDto!): Token!
+  updateUser(status: Boolean!, id: Float!): User!
+  createQuiz(createQuizDto: CreateQuizDto!): Quiz!
+  createQues(createQuesDto: CreateQuesDto!): Question!
+  updateQues(status: Boolean!, id: Float!): Question!
+  createOption(createOptionDto: CreateOptionDto!): Option!
+  updateOption(status: Boolean!, id: Float!): Option!
+  createParticipant(createPartDto: CreatePartDto!): Participants!
+  submitAns(createAnsDto: CreateAnsDto!): Answer!
+}
+
+input UserDto {
+  first_name: String!
+  last_name: String!
+  phone: String!
+  email: String!
+  username: String!
+  password: String!
+  role: Role!
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+input SigninDto {
+  username: String!
+  password: String!
+}
+
+input CreateQuizDto {
+  title: String!
+}
+
+input CreateQuesDto {
+  ques_text: String!
+  quiz_id: Float!
+}
+
+input CreateOptionDto {
+  opt_text: String!
+  ques_id: Float!
+  is_correct: Boolean = false
+}
+
+input CreatePartDto {
+  quiz_id: Float!
+}
+
+input CreateAnsDto {
+  ques_id: Float!
+  opt_id: Float!
+  part_id: Float!
+  is_correct: Boolean = false
+}
